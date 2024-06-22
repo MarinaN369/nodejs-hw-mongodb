@@ -11,7 +11,7 @@ import {notFoundHandler} from './middlewares/notFoundHandler.js';
 
 export const setupServer = () => {
     const app = express();
-    const PORT = Number(env('PORT', '3000'));
+    const PORT = Number(env('PORT', '3001'));
 
     app.use(express.json());
     app.use(cors());
