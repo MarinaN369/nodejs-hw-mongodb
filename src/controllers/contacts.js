@@ -6,7 +6,7 @@ import {
     deleteContact,
 } from '..//services/contacts.js';
 import createHttpError from 'http-errors';
-import {notFoundHandler} from '../middlewares/notFoundHandler.js';
+
 
 
 export const getContactsController = async(req, res) => {
@@ -49,7 +49,7 @@ export const patchContactController = async(req, res, next) => {
     const result = await updateContact(contactId, req.body);
 
     if(!result) {
-        next(createHttpError(notFoundHandler));
+        next(createHttpError(404, 'Contact not found'));
         return;
     }
 
@@ -65,7 +65,7 @@ const {contactId} = req.params;
 const contact = await deleteContact(contactId);
 
 if(!contact) {
-    next(createHttpError(notFoundHandler));
+    next(createHttpError(404, 'Contact not found'));
     return;
 }
 
