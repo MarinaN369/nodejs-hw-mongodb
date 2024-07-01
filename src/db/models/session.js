@@ -15,7 +15,8 @@ accessTokenValidUntil:
 required: true,},
 refreshTokenValidUntil:
 {type: Date,
-required: true,}
-});
+required: true,},},
+{ timestamps: true, versionKey: false },
+);
 
 export const SessionCollection = model('session', sessionSchema);
