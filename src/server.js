@@ -6,6 +6,7 @@ import {env} from './utils/env.js';
 import {errorHandler} from './middlewares/errorHandler.js';
 import {notFoundHandler} from './middlewares/notFoundHandler.js';
 import router from './routers/index.js';
+import cookieParser from 'cookie-parser';
 
 
 
@@ -23,6 +24,8 @@ export const setupServer = () => {
     app.use((req, res, next) => {console.log(`Time: ${new Date().toLocaleString()}`);
     next();
 });
+
+app.use(cookieParser());
 
 app.get('/', (req,res) => {
   res.json({
