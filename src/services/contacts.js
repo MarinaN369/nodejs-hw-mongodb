@@ -1,6 +1,7 @@
 import {contactsCollection} from '../db/models/contact.js';
 import { calculatePaginationData } from '../utils/calculatePaginationData.js';
 import { SORT_ORDER } from '../index.js';
+import mongoose from 'mongoose';
 
 export const getAllContacts = async ({
   page,
@@ -27,8 +28,16 @@ export const getAllContacts = async ({
 };
 
 export const getAllContactsById = async(contactId) => {
+  try {if (!mongoose.Types.ObjectId.isValid(contactId)) {
+    return null;
+  }
     const contact = await contactsCollection.findById(contactId);
     return contact;
+}
+catch (error) {
+  console.error('Error getting contact by ID', error);
+  throw error;
+}
 };
 
 export const createContact = async(payload) => {
@@ -37,6 +46,9 @@ export const createContact = async(payload) => {
 };
 
 export const updateContact = async(contactId, payload, options = {}) => {
+  if (!mongoose.Types.ObjectId.isValid(contactId)) {
+    throw new Error('Invalid contact ID');
+  }
     const rawResult = await contactsCollection.findOneAndUpdate(
         { _id: contactId },
         payload,
@@ -56,6 +68,9 @@ export const updateContact = async(contactId, payload, options = {}) => {
     };
 
     export const deleteContact = async(contactId) => {
+      if (!mongoose.Types.ObjectId.isValid(contactId)) {
+        throw new Error('Invalid contact ID');
+      }
 const contact = await contactsCollection.findOneAndDelete({
     _id: contactId
 });
