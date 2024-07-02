@@ -54,7 +54,7 @@ export const createContactController = async(req, res) => {
     res.status(201).json({
         status: 201,
         message: 'Successfully created a contact!',
-        data: contact,
+        data: { ...contact.toObject(), __v: 0 },
     });
 };
 
@@ -76,6 +76,7 @@ export const patchContactController = async(req, res, next) => {
 
 export const deleteContactController = async(req, res, next) => {
 const {contactId} = req.params;
+
 const contact = await deleteContact(contactId);
 
 if(!contact) {
