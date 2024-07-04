@@ -1,8 +1,8 @@
-import {Router} from 'exspress';
-import { ctrlWrapper } from '../utils/ctrlWrapper';
-import { registerUserSchema, loginUserSchema } from '../validation/auth';
-import { registerUserController, loginUserController } from '../controllers/auth';
-import { validateBody } from '../middlewares/validateBody';
+import {Router} from 'express';
+import { ctrlWrapper } from '../utils/ctrlWrapper.js';
+import { registerUserSchema, loginUserSchema } from '../validation/auth.js';
+import { registerUserController, loginUserController } from '../controllers/auth.js';
+import { validateBody } from '../middlewares/validateBody.js';
 import {logoutUserController} from '../controllers/auth.js';
 import {refreshUserSessionController} from '../controllers/auth.js';
 

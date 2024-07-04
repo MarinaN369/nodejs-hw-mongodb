@@ -1,5 +1,5 @@
 import createHttpError from "http-errors";
-import { UsersCollection } from "../db/models/user";
+import { UsersCollection } from "../db/models/user.js";
 import { SessionsCollection } from "../db/models/session.js";
 import bcrypt from 'bcrypt';
 
@@ -85,9 +85,8 @@ export const refreshUsersSession = async({sessionId, refreshToken}) => {
             {
                 userId: session.userId,
                 ... newSession,
-            }
-        )
-}
+            });
+};
 
 
 
