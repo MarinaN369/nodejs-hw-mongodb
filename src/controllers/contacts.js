@@ -13,6 +13,7 @@ import { parseSortParams } from '../utils/parseSortParams.js';
 
 
 export const getContactsController = async(req, res) => {
+    const { _id: userId } = req.user;
     const { page, perPage } = parsePaginationParams(req.query);
     const { sortBy, sortOrder } = parseSortParams(req.query);
 
@@ -22,6 +23,7 @@ export const getContactsController = async(req, res) => {
         perPage,
         sortBy,
         sortOrder,
+        userId,
     }
     );
 res.status(200).json({
@@ -32,8 +34,9 @@ res.status(200).json({
 };
 
 export const getContactByIdController= async(req, res, next) => {
+    const { _id: userId } = req.user;
     const {contactId} = req.params;
-    const contact = await getAllContactsById(contactId);
+    const contact = await getAllContactsById(contactId, userId);
 
     if(!contact) {
         next(createHttpError(404, 'Contact not found'));
@@ -48,19 +51,21 @@ export const getContactByIdController= async(req, res, next) => {
 };
 
 export const createContactController = async(req, res) => {
+    const { _id: userId } = req.user;
 
-    const contact = await createContact(req.body);
+    const contact = await createContact(...req.body, userId);
 
     res.status(201).json({
         status: 201,
         message: 'Successfully created a contact!',
-        data: { ...contact.toObject(), __v: 0 },
+        data: contact,
     });
 };
 
 export const patchContactController = async(req, res, next) => {
+    const { _id: userId } = req.user;
     const {contactId} = req.params;
-    const result = await updateContact(contactId, req.body);
+    const result = await updateContact(contactId, userId, req.body);
 
     if(!result) {
         next(createHttpError(404, 'Contact not found'));
@@ -75,8 +80,9 @@ export const patchContactController = async(req, res, next) => {
 };
 
 export const deleteContactController = async(req, res, next) => {
+const { _id: userId } = req.user;
 const {contactId} = req.params;
-const contact = await deleteContact(contactId);
+const contact = await deleteContact(contactId, userId);
 
 if(!contact) {
     next(createHttpError(404, 'Contact not found'));
