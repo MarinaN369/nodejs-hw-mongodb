@@ -40,9 +40,6 @@ return await SessionsCollection.create({
 });
 };
 
-export const logoutUser = async(sessionId) => {
-    await SessionsCollection.deleteOne({_id: sessionId});
-};
 
 const createSession = () => {
     const accessToken = randomBytes(30).toString('base64');
@@ -57,6 +54,11 @@ const createSession = () => {
 };
 
 export const refreshUsersSession = async({sessionId, refreshToken}) => {
+    console.log(`Starting refreshUsersSession with sessionId: ${sessionId} and refreshToken: ${refreshToken}`);
+
+     // Перевірка значень, які передаються у функцію
+     console.log(`Received sessionId: ${sessionId}`);
+     console.log(`Received refreshToken: ${refreshToken}`);
     const session = await SessionsCollection.findOne(
         {
             _id: sessionId,
@@ -64,6 +66,7 @@ export const refreshUsersSession = async({sessionId, refreshToken}) => {
         });
 
         if(!session) {
+            console.error('Session not found');
             throw createHttpError(401, 'Session not found');
         }
 
@@ -71,10 +74,16 @@ export const refreshUsersSession = async({sessionId, refreshToken}) => {
         new Date() > new Date(session.refreshTokenValidUntil);
 
         if(isSessionTokenExpired) {
+            console.error('Session token expired');
             throw createHttpError(401, 'Session token expired');
         }
 
+
+    console.log('Session token is valid');
+
         const newSession = createSession();
+
+        console.log('New session created:', newSession);
 
         await SessionsCollection.deleteOne({
             _id: sessionId,
@@ -86,7 +95,12 @@ export const refreshUsersSession = async({sessionId, refreshToken}) => {
                 userId: session.userId,
                 ... newSession,
             });
+
 };
+export const logoutUser = async(sessionId, refreshToken ) => {
+    await SessionsCollection.deleteOne({_id: sessionId, refreshToken });
+};
+
 
 
 
