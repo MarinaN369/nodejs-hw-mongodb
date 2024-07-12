@@ -6,7 +6,7 @@ import {refreshUsersSession} from '../services/auth.js';
 export const registerUserController = async(req, res) => {
     const user = await registerUser(req.body);
 
-    res.json({
+    res.status(201).json({
         status: 201,
         message: 'Successfully registered a user!',
         data: user,
@@ -16,16 +16,6 @@ export const registerUserController = async(req, res) => {
 export const loginUserController = async(req, res) => {
 const session = await loginUser(req.body);
 setupSession(res, session);
-// res.cookie('refreshToken', session.refreshToken, {
-//     httpOnly: true,
-//     expires: new Date(Date.now() + ONE_DAY),
-// });
-
-// res.cookie('sessionId, session_id', {
-//     httpOnly: true,
-//     expires: new Date(Date.now() + ONE_DAY),
-// });
-
 res.json({
     status: 200,
     message: 'Successfully logged in an user!',
