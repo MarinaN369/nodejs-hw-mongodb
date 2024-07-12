@@ -20,10 +20,7 @@ res.cookie('refreshToken', session.refreshToken, {
     httpOnly: true,
     expires: new Date(Date.now() + ONE_DAY),
 });
-res.cookie('refreshToken', session.refreshToken, {
-    httpOnly: true,
-    expires: new Date(Date.now() + ONE_DAY),
-});
+
 res.cookie('sessionId, session_id', {
     httpOnly: true,
     expires: new Date(Date.now() + ONE_DAY),

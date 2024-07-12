@@ -40,6 +40,9 @@ return await SessionsCollection.create({
 });
 };
 
+export const logoutUser = async(sessionId) => {
+    await SessionsCollection.deleteOne({_id: sessionId });
+};
 
 const createSession = () => {
     const accessToken = randomBytes(30).toString('base64');
@@ -97,9 +100,7 @@ export const refreshUsersSession = async({sessionId, refreshToken}) => {
             });
 
 };
-export const logoutUser = async(sessionId, refreshToken ) => {
-    await SessionsCollection.deleteOne({_id: sessionId, refreshToken });
-};
+
 
 
 
