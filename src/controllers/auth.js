@@ -25,9 +25,11 @@ res.json({
 });
 };
 
-export const logoutUserController = async(req, res) => {
-    if(req.cookies.sessionId) {
-        await logoutUser(req.cookies.sessionId);
+export const logoutUserController = async (req, res) => {
+
+
+    if (req.cookies.sessionId) {
+      await logoutUser(req.cookies.sessionId);
     }
 
     res.clearCookie('sessionId');
