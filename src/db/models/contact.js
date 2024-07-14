@@ -34,9 +34,11 @@ const contactsSchema = new Schema(
     {
       createdAt: {
         timestamps: true,
+        versionKey: false,
       },
       updatedAt: {
         timestamps: true,
+        versionKey: false,
       },
     },
   );
