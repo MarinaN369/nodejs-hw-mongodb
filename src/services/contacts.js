@@ -3,6 +3,7 @@ import { calculatePaginationData } from '../utils/calculatePaginationData.js';
 import { SORT_ORDER } from '../index.js';
 
 export const getAllContacts = async ({
+  userId,
   page,
   perPage,
   sortOrder = SORT_ORDER.ASC,
@@ -11,8 +12,8 @@ export const getAllContacts = async ({
   const limit = perPage;
   const skip = (page - 1) * perPage;
 
-  const contactsQuery = contactsCollection.find();
-  const contactsCount = await contactsCollection.find()
+  const contactsQuery = contactsCollection.find({userId});
+  const contactsCount = await contactsCollection.find({userId})
     .merge(contactsQuery)
     .countDocuments();
 

@@ -1,20 +1,19 @@
 openapi: 3.1.0
 info:
   version: 1.0.0
-  title: <Contacts App>
+  title: <Contacts app>
   license:
     name: Apache 2.0
     url: <http://www.apache.org/licenses/LICENSE-2.0.html>
   description: >
-    Application for working with contacts
+    This is a documentation of contacts app
 tags:
-- name: Contacts
+  - name: Contacts
     description: Operations about contacts.
   - name: Auth
     description: Auth operations.
 servers:
-  - url: <http://localhost:3000>
-  - url: #посилання на задеплоєний сайт
+  - url: http://localhost:3001
 paths:
   /contacts:
     get:
