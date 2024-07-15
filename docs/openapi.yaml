@@ -13,7 +13,7 @@ tags:
   - name: Auth
     description: Auth operations.
 servers:
-  - url: http://localhost:3001
+  - url: <http://localhost:3001/api-docs>
 paths:
   /contacts:
     get:
