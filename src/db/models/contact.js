@@ -32,15 +32,9 @@ const contactsSchema = new Schema(
       photo: { type: String },
     },
     {
-      createdAt: {
-        timestamps: true,
-        versionKey: false,
-      },
-      updatedAt: {
-        timestamps: true,
-        versionKey: false,
-      },
-    },
+      timestamps: true,
+      versionKey: false,
+    }
   );
 
     export const contactsCollection = model('contacts', contactsSchema);
