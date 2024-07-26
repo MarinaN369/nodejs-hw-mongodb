@@ -3,6 +3,7 @@ import { calculatePaginationData } from '../utils/calculatePaginationData.js';
 import { SORT_ORDER } from '../index.js';
 
 export const getAllContacts = async ({
+  userId,
   page,
   perPage,
   sortOrder = SORT_ORDER.ASC,
@@ -11,8 +12,8 @@ export const getAllContacts = async ({
   const limit = perPage;
   const skip = (page - 1) * perPage;
 
-  const contactsQuery = contactsCollection.find();
-  const contactsCount = await contactsCollection.find()
+  const contactsQuery = contactsCollection.find({ userId});
+  const contactsCount = await contactsCollection.find({userId})
     .merge(contactsQuery)
     .countDocuments();
 
@@ -37,6 +38,8 @@ export const createContact = async(payload) => {
 };
 
 export const updateContact = async(contactId, userId, payload, options = {}) => {
+  payload.photo = options.photo;
+  try {
     const rawResult = await contactsCollection.findOneAndUpdate(
         { _id: contactId, userId },
         payload,
@@ -53,7 +56,11 @@ export const updateContact = async(contactId, userId, payload, options = {}) => 
         contact: rawResult.value,
         isNew: Boolean(rawResult?.lastErrorObject?.upserted),
       };
-    };
+    } catch (error) {
+      console.error('Error during updateContact:', error);
+      throw error;
+    }
+  };
 
     export const deleteContact = async(contactId, userId) => {
 const contact = await contactsCollection.findOneAndDelete({

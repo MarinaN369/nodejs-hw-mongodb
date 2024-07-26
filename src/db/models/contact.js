@@ -32,12 +32,8 @@ const contactsSchema = new Schema(
       photo: { type: String },
     },
     {
-      createdAt: {
-        timestamps: true,
-      },
-      updatedAt: {
-        timestamps: true,
-      },
+      timestamps: true,
+    versionKey: false,
     },
   );
 
