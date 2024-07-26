@@ -33,8 +33,8 @@ const contactsSchema = new Schema(
     },
     {
       timestamps: true,
-    versionKey: false,
-    },
+      versionKey: false,
+    }
   );
 
     export const contactsCollection = model('contacts', contactsSchema);

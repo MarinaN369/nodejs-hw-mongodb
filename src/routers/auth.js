@@ -24,13 +24,13 @@ router.post('/register',
 
  router.post('/refresh', ctrlWrapper(refreshUserSessionController));
 
- router.post('/request-reset-email',
+ router.post('/send-reset-email',
   validateBody(requestResetEmailSchema),
   ctrlWrapper(requestResetEmailController),
 );
 
 router.post(
-    '/reset-password',
+    '/reset-pwd',
     validateBody(resetPasswordSchema),
     ctrlWrapper(resetPasswordController),
   );
