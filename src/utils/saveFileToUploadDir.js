@@ -9,5 +9,5 @@ export const saveFileToUploadDir = async (file) => {
     path.join(UPLOAD_DIR, file.filename),
   );
 
-  return `${env('ENABLE_CLOUDINARY')}/uploads/${file.filename}`;
+  return `${env('APP_DOMAIN')}/uploads/${file.filename}`;
 };
