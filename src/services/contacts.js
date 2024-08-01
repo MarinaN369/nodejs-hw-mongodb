@@ -38,6 +38,8 @@ export const createContact = async(payload) => {
 };
 
 export const updateContact = async(contactId, userId, payload, options = {}) => {
+  payload.photo = options.photo;
+  try {
     const rawResult = await contactsCollection.findOneAndUpdate(
         { _id: contactId, userId },
         payload,
@@ -54,7 +56,11 @@ export const updateContact = async(contactId, userId, payload, options = {}) => 
         contact: rawResult.value,
         isNew: Boolean(rawResult?.lastErrorObject?.upserted),
       };
-    };
+    } catch (error) {
+      console.error('Error during updateContact:', error);
+      throw error;
+    }
+  };
 
     export const deleteContact = async(contactId, userId) => {
 const contact = await contactsCollection.findOneAndDelete({
