@@ -355,34 +355,34 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
                 "type": "object",
                 "properties": {
                   "name": {
+                    "description": "Contact's name",
                     "type": "string",
-                    "example": "John Doe",
-                    "description": "The contact's name"
+                    "example": "John Doe"
                   },
                   "phoneNumber": {
+                    "description": "Contact's phone number",
                     "type": "string",
-                    "example": "1234567890",
-                    "description": "The contact's phone number"
+                    "example": "380982355908"
                   },
                   "email": {
+                    "description": "Contact's email",
                     "type": "string",
-                    "example": "john.doe@example.com",
-                    "description": "The contact's email address"
+                    "example": "googl@gmail.com"
                   },
                   "isFavourite": {
+                    "description": "Is the contact in your favorites?",
                     "type": "boolean",
-                    "example": false,
-                    "description": "Whether the contact is marked as favourite"
+                    "example": "false",
+                    "default": "false"
                   },
                   "contactType": {
+                    "description": "Contact's type",
                     "type": "string",
-                    "example": "personal",
-                    "description": "The type of contact (e.g., work, home, personal)",
                     "enum": [
                       "work",
                       "home",
@@ -390,19 +390,14 @@
                     ]
                   },
                   "photo": {
+                    "description": "Contact's photo",
                     "type": "string",
-                    "example": "https://example.com/photo.jpg",
-                    "description": "URL of the contact's photo"
+                    "format": "binary"
                   }
-                },
-                "required": [
-                  "name",
-                  "phoneNumber"
-                ]
+                }
               }
             }
-          },
-          "required": false
+          }
         },
         "responses": {
           "200": {
