@@ -12,32 +12,32 @@ const contactsSchema = new Schema(
       },
       email: {
         type: String,
+        required: false,
+      unique: true,
+
         // optional: true,
       },
       isFavourite: {
         type: Boolean,
         default: false,
+        required: false,
       },
       contactType: {
         type: String,
-        required: true,
+        required: false,
         default: 'personal',
         enum: ['work', 'home', 'personal'],
       },
       userId: {
         type: Schema.Types.ObjectId,
         ref: 'users',
-        required: true,
+
       },
       photo: { type: String },
     },
     {
-      createdAt: {
-        timestamps: true,
-      },
-      updatedAt: {
-        timestamps: true,
-      },
+      timestamps: true,
+      versionKey: false,
     },
   );
 

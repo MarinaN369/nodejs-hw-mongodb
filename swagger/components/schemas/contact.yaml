@@ -2,12 +2,11 @@ type: object
 required:
   - name
   - phoneNumber
-  - email
 properties:
-  _id:
-    description: "Contact's id"
-    type: string
-    example: 65e4decdd286b30065d54af9
+  # _id:
+  #   description: "Contact's id"
+  #   type: string
+  #   example: 65e4decdd286b30065d54af9
   name:
     description: "Contact's name"
     type: string
@@ -24,10 +23,10 @@ properties:
     description: 'Favourite contact'
     type: boolean
     example: false
-  userId:
-    description: 'id of user'
-    type: string
-    example: 65e4decdd286b30065d54af9
+  # userId:
+  #   description: 'id of user'
+  #   type: string
+  #   example: 65e4decdd286b30065d54af9
   contactType:
     description: 'Type of contact'
     type: string
